@@ -121,7 +121,34 @@
 						<!-- Delete -->
 							<article id="delete">
 								<h2 class="major">Delete Account</h2>
-
+								<form method="post" action="delete.php">
+								    <div class="field half first">
+                                        <label for="numberdelete">Phone Number</label>
+                                            <input type="text" name="numberdelete" id="numberdelete" value="" placeholder="required" />
+                                    </div>
+                                    <div class="field half">
+                                        <label for="namedelete">Old Name</label>
+                                            <input type="text" name="namedelete" id="namedelete" value="" placeholder="Anonymous" />
+                                    </div>
+                                    <input type="checkbox" id="sure2" name="sure2" unchecked>
+                                    <label for="sure2">Are you sure you want to delete your account and messages?</label>
+                                    <ul class="actions">
+                                        <li><input type="submit" id="isSure2" value="Submit" class="button disabled" /></li>
+                                    	<li><input type="reset" value="Reset" /></li>
+                                  	</ul>
+                                  	<script type="text/javascript">
+                                  	    var checker = document.getElementById('sure2');
+                                        var sendbtn = document.getElementById('isSure2');
+                                        // when unchecked or checked, run the function
+                                        checker.onchange = function(){
+                                            if(this.checked){
+                                                sendbtn.className = "button special";
+                                            } else {
+                                                sendbtn.className = "button disabled";
+                                            }
+                                        }
+                                    </script>
+                                </form>
 							</article>
 
 						<!-- SQL Query -->
