@@ -288,8 +288,8 @@
                                                     echo "Error: " . mysql_error();
                                                 }
                                                 $contestdate = date("Y-m-d");
-                                                $producerdate = mysql_real_escape_string($producerdate);
-                                                utf8_encode($producerdate);
+                                                $contestdate = mysql_real_escape_string($contestdate);
+                                                utf8_encode($contestdate);
                                                 mysql_select_db("Noisy_Parrot",$link);
                                                 $query = "SELECT *  FROM Contest WHERE ending_date >= '" . $contestdate . "'";
                                                 $result = mysql_query($query);
@@ -471,13 +471,18 @@
                         <article id="participate">
                         	<h2 class="major">Participate To A Contest</h2>
                             <form method="post" action="participate.php" accept-charset="UTF-8">
-                                <div class="field half first">
+                                <div class="field">
                                     <label for="number">Phone number</label>
                                     <input type="text" name="number" id="number" required value="" placeholder="required" />
                                 </div>
-                                <div class="field half">
-                                    <label for="contest">Contest</label>
-                                        <input type="text" name="contest" id="contest" value=""  required placeholder="contest" />
+                                <div class="field">
+                                	<label for="show">Show</label>
+                                	<div class="select-wrapper">
+                                        <select name="contest" id="contest">
+                                            <option value="default">-</option>
+                                            <?php require_once "contests.php"; getContests() ?>
+                                        </select>
+                                	</div>
                                 </div>
                                 <ul class="actions">
                                     <li><input type="submit" name="submit" value="Submit"/></li>
