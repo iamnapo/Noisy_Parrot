@@ -43,7 +43,21 @@
 						<!-- Search -->
 							<article id="search">
 								<h2 class="major">Search</h2>
+								<p><strong>You can search for <a href="#songs">Songs</a>, <a href="#producers">Radio Producers</a> or <a href="#shows">Shows</a>!</p></strong>
 							</article>
+
+
+                            <article id="songs">
+							    <h2 class="major">Songs</h2>
+						    </article>
+						    <article id="producers">
+                                <h2 class="major">Radio Producers</h2>
+                            </article>
+                            <article id="shows">
+                                <h2 class="major">Radio Shows</h2>
+                            </article>
+
+
 
 						<!-- Insert -->
 							<article id="insert">
