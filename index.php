@@ -18,7 +18,7 @@
 				<!-- Header -->
 					<header id="header">
 						<div class="logo">
-							<span class="icon fa-database"></span>
+							<span class="icon fa-music"></span>
 						</div>
 						<div class="content">
 							<div class="inner">
@@ -153,16 +153,23 @@
 
 						<!-- SQL Query -->
 							<article id="admin">
-								<h2 class="major">SQL Query</h2>
-								<pre><code>i = 0;
-
-                                           while (!deck.isInOrder()) {
-                                               print 'Iteration ' + i;
-                                               deck.shuffle();
-                                               i++;
-                                           }
-
-                                           print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
+								<form method="post" action="admin.php">
+								<div class="field half first">
+								    <h2 class="major">SQL Query</h2>
+								</div>
+								<div class="field half">
+                                    <label for="admincode">Password</label>
+                                	<input type="password" name="admincode" id="admincode" required value="" placeholder="Admin Password" />
+                                </div>
+								    <div class="field">
+									    <label for="sqlquery">Query</label>
+									    <textarea name="sqlquery" id="sqlquery" required placeholder="Enter your code" rows="6"></textarea>
+									</div>
+								    <ul class="actions">
+                                        <li><input type="submit" id="exec" value="Execute" class="special" /></li>
+                                	    <li><input type="reset" value="Reset" /></li>
+                                    </ul>
+                                </form>
 							</article>
 
 					</div>
