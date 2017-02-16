@@ -50,12 +50,12 @@
 								<h2 class="major">Send A Message</h2>
                                 <form method="post" action="message.php">
                                     <div class="field half first">
-                                        <label for="name">Name</label>
-                                        <input type="text" name="name" id="name" value="" placeholder="optional" />
-                                    </div>
-                                    <div class="field half">
                                         <label for="number">Phone number</label>
                                         <input type="text" name="number" id="number" required value="" placeholder="required" />
+                                    </div>
+                                    <div class="field half">
+                                        <label for="name">Name</label>
+                                            <input type="text" name="name" id="name" value="" placeholder="Anonymous" />
                                     </div>
 									<div class="field">
 										<label for="show">Show</label>
@@ -80,6 +80,42 @@
 						<!-- Update -->
 							<article id="update">
 								<h2 class="major">Modify Account</h2>
+								<form method="post" action="modify.php">
+								    <div class="field half first">
+                                        <label for="numberold">Old Number</label>
+                                            <input type="text" name="numberold" id="numberold" value="" placeholder="required" />
+                                    </div>
+                                    <div class="field half">
+                                        <label for="nameold">Old Name</label>
+                                            <input type="text" name="nameold" id="nameold" value="" placeholder="Anonymous" />
+                                    </div>
+                                    <div class="field half first">
+                                        <label for="numbernew">New Number</label>
+                                            <input type="text" name="numbernew" id="numbernew" value="" placeholder="required" />
+                                    </div>
+                                    <div class="field half">
+                                        <label for="namenew">New Name</label>
+                                            <input type="text" name="namenew" id="namenew" value="" placeholder="Anonymous" />
+                                    </div>
+                                    <input type="checkbox" id="sure" name="sure" unchecked>
+                                    <label for="sure">Are you sure?</label>
+                                    <ul class="actions">
+                                        <li><input type="submit" id="isSure" value="Submit" class="button disabled" /></li>
+                                    	<li><input type="reset" value="Reset" /></li>
+                                  	</ul>
+                                  	<script type="text/javascript">
+                                  	    var checker = document.getElementById('sure');
+                                        var sendbtn = document.getElementById('isSure');
+                                        // when unchecked or checked, run the function
+                                        checker.onchange = function(){
+                                            if(this.checked){
+                                                sendbtn.className = "button special";
+                                            } else {
+                                                sendbtn.className = "button disabled";
+                                            }
+                                        }
+                                    </script>
+                                </form>
 							</article>
 
 						<!-- Delete -->
