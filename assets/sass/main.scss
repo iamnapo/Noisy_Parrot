@@ -4,8 +4,7 @@
 @import 'libs/skel';
 @import 'font-awesome.min.css';
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300italic,600italic,300,600');
-
-
+@charset "utf-8";
 
 	@include skel-breakpoints((
 		xlarge:		'(max-width: 1680px)',

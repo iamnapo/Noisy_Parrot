@@ -49,12 +49,210 @@
 
                             <article id="songs">
 							    <h2 class="major">Songs</h2>
+							    <form method="get">
+                                    <div class="field">
+                                        <label for="songinput">Search Input</label>
+                                        <input type="text" name="songinput" id="songinput" required value="" placeholder="Name or Artist or Album etc." />
+                                    </div>
+                                    <ul class="actions">
+                                        <li><input type="submit" id="dosongsearch" name="dosongsearch" value="Search"/></li>
+                                        <li><input type="reset" value="Reset" /></li>
+                                    </ul>
+                                </form>
+                                <div class="table-wrapper">
+    							    <table>
+    								    <thead>
+    									    <tr>
+    										    <th>Title</th>
+    											<th>Album</th>
+    											<th>Artist</th>
+    											<th>Release Year</th>
+    											<th>Genre</th>
+    										</tr>
+    									</thead>
+    									<tbody>
+    									    <?php
+                                            if(isset($_GET['dosongsearch'])){
+                                                $link = mysql_connect("webpagesdb.it.auth.gr:3306","Administrator","Administrator");
+                                                if (!$link) {
+                                                    die("Can not connect: " . mysql_error());
+                                                }
+                                                mysql_query("SET NAMES 'utf8'");
+                                                mysql_query("SET CHARACTER SET 'utf8'");
+                                                mysql_query("set character_set_client=utf8");
+                                                mysql_query("set character_set_connection=utf8");
+                                                mysql_query("set collation_connection=utf8");
+                                                mysql_query("set character_set_results=utf8");
+                                                mysql_query("set time_zone='+02:00'");
+
+                                                $select = mysql_select_db("Noisy_Parrot",$link);
+                                                if (!select) {
+                                                    echo "Error: " . mysql_error();
+                                                }
+                                                $songdata = $_GET['songinput'];
+                                                $songdata = mysql_real_escape_string($songdata);
+                                                utf8_encode($songdata);
+                                                mysql_select_db("Noisy_Parrot",$link);
+                                                $query = "SELECT *  FROM Song WHERE title = '" . $songdata . "' OR genre = '" . $songdata . "' OR album = '" . $songdata . "' OR release_year = '" . $songdata . "' OR artist = '" . $songdata . "'";
+                                                $result = mysql_query($query);
+                                                while($row = mysql_fetch_array($result)){
+                                                    $title = $row['title'];
+                                                    $genre = $row['genre'];
+                                                    $album = $row['album'];
+                                                    $release_year = $row['release_year'];
+                                                    $artist = $row['artist'];
+                                                    echo "<tr>";
+                                                    echo "<td>" . $title . "</td>";
+                                                    echo "<td>" . $album . "</td>";
+                                                    echo "<td>" . $artist . "</td>";
+                                                    echo "<td>" . $release_year . "</td>";
+                                                    echo "<td>" . $genre . "</td>";
+                                                    echo "</tr>";
+                                                }
+                                            }
+                                            ?>
+    									</tbody>
+    									<tfoot>
+    									</tfoot>
+    								</table>
+    							</div>
 						    </article>
 						    <article id="producers">
                                 <h2 class="major">Radio Producers</h2>
+                                <form method="get">
+                                    <div class="field">
+                                        <label for="producerinput">Search Input</label>
+                                        <input type="text" name="producerinput" id="producerinput" required value="" placeholder="Name or NickName." />
+                                    </div>
+                                    <ul class="actions">
+                                        <li><input type="submit" id="doproducersearch" name="doproducersearch" value="Search"/></li>
+                                        <li><input type="reset" value="Reset" /></li>
+                                    </ul>
+                                </form>
+                                <div class="table-wrapper">
+                                	    <table>
+                                		    <thead>
+                                			    <tr>
+                                				    <th>Name</th>
+                                					<th>NickName</th>
+                                					<th>Phone Number</th>
+                                					<th>Email Address</th>
+                                				</tr>
+                                			</thead>
+                                			<tbody>
+                                			    <?php
+                                            if(isset($_GET['doproducersearch'])){
+                                                $link = mysql_connect("webpagesdb.it.auth.gr:3306","Administrator","Administrator");
+                                                if (!$link) {
+                                                    die("Can not connect: " . mysql_error());
+                                                }
+                                                mysql_query("SET NAMES 'utf8'");
+                                                mysql_query("SET CHARACTER SET 'utf8'");
+                                                mysql_query("set character_set_client=utf8");
+                                                mysql_query("set character_set_connection=utf8");
+                                                mysql_query("set collation_connection=utf8");
+                                                mysql_query("set character_set_results=utf8");
+                                                mysql_query("set time_zone='+02:00'");
+
+                                                $select = mysql_select_db("Noisy_Parrot",$link);
+                                                if (!select) {
+                                                    echo "Error: " . mysql_error();
+                                                }
+                                                $producerdata = $_GET['producerinput'];
+                                                $producerdata = mysql_real_escape_string($producerdata);
+                                                utf8_encode($producerdata);
+                                                mysql_select_db("Noisy_Parrot",$link);
+                                                $query = "SELECT *  FROM RadioShowProducer WHERE name = '" . $producerdata . "' OR nickname = '" . $producerdata . "'";
+                                                $result = mysql_query($query);
+                                                while($row = mysql_fetch_array($result)){
+                                                    $name = $row['name'];
+                                                    $nickname = $row['nickname'];
+                                                    $phone = $row['phone_number'];
+                                                    $email = $row['email_address'];
+                                                    echo "<tr>";
+                                                    echo "<td>" . $name . "</td>";
+                                                    echo "<td>" . $nickname . "</td>";
+                                                    echo "<td>" . $phone . "</td>";
+                                                    echo "<td>" . $email . "</td>";
+                                                    echo "</tr>";
+                                                }
+                                            }
+                                            ?>
+                                			</tbody>
+                                			<tfoot>
+                                			</tfoot>
+                                		</table>
+                                </div>
                             </article>
                             <article id="shows">
                                 <h2 class="major">Radio Shows</h2>
+                                <form method="get">
+                                    <div class="field">
+                                        <label for="radioshowinput">Search Input</label>
+                                        <input type="text" name="radioshowinput" id="radioshowinput" required value="" placeholder="Name or theme etc." />
+                                    </div>
+                                    <ul class="actions">
+                                        <li><input type="submit" id="doradioshowsearch" name="doradioshowsearch" value="Search"/></li>
+                                        <li><input type="reset" value="Reset" /></li>
+                                    </ul>
+                                </form>
+                                <div class="table-wrapper">
+                                	    <table>
+                                		    <thead>
+                                			    <tr>
+                                				    <th>Name</th>
+                                					<th>Starting Time</th>
+                                					<th>Ending Time</th>
+                                					<th>Theme</th>
+                                					<th>Duration</th>
+                                				</tr>
+                                			</thead>
+                                			<tbody>
+                                			    <?php
+                                            if(isset($_GET['doradioshowsearch'])){
+                                                $link = mysql_connect("webpagesdb.it.auth.gr:3306","Administrator","Administrator");
+                                                if (!$link) {
+                                                    die("Can not connect: " . mysql_error());
+                                                }
+                                                mysql_query("SET NAMES 'utf8'");
+                                                mysql_query("SET CHARACTER SET 'utf8'");
+                                                mysql_query("set character_set_client=utf8");
+                                                mysql_query("set character_set_connection=utf8");
+                                                mysql_query("set collation_connection=utf8");
+                                                mysql_query("set character_set_results=utf8");
+                                                mysql_query("set time_zone='+02:00'");
+
+                                                $select = mysql_select_db("Noisy_Parrot",$link);
+                                                if (!select) {
+                                                    echo "Error: " . mysql_error();
+                                                }
+                                                $radioshowdata = $_GET['radioshowinput'];
+                                                $radioshowdata = mysql_real_escape_string($radioshowdata);
+                                                utf8_encode($radioshowdata);
+                                                mysql_select_db("Noisy_Parrot",$link);
+                                                $query = "SELECT *  FROM RadioShow WHERE name = '" . $radioshowdata . "' OR start_time = '" . $radioshowdata . "' OR end_time = '" . $radioshowdata . "' OR theme = '" . $radioshowdata . "' OR duration = '" . $radioshowdata . "'";
+                                                $result = mysql_query($query);
+                                                while($row = mysql_fetch_array($result)){
+                                                    $name = $row['name'];
+                                                    $starttime = $row['start_time'];
+                                                    $endtime = $row['end_time'];
+                                                    $theme = $row['theme'];
+                                                    $duration = $row['duration'];
+                                                    echo "<tr>";
+                                                    echo "<td>" . $name . "</td>";
+                                                    echo "<td>" . $starttime . "</td>";
+                                                    echo "<td>" . $endtime . "</td>";
+                                                    echo "<td>" . $theme . "</td>";
+                                                    echo "<td>" . $duration . "</td>";
+                                                    echo "</tr>";
+                                                }
+                                            }
+                                            ?>
+                                			</tbody>
+                                			<tfoot>
+                                			</tfoot>
+                                		</table>
+                                </div>
                             </article>
 
 
@@ -62,7 +260,7 @@
 						<!-- Insert -->
 							<article id="insert">
 								<h2 class="major">Send A Message</h2>
-                                <form method="post" action="message.php">
+                                <form method="post" action="message.php" accept-charset="UTF-8">
                                     <div class="field half first">
                                         <label for="number">Phone number</label>
                                         <input type="text" name="number" id="number" required value="" placeholder="required" />
@@ -114,18 +312,18 @@
                                     <input type="checkbox" id="sure" name="sure" unchecked>
                                     <label for="sure">Are you sure?</label>
                                     <ul class="actions">
-                                        <li><input type="submit" id="isSure" value="Submit" class="button disabled" /></li>
+                                        <li><input type="submit" name="isSure" id="isSure" value="Update" class="button disabled" /></li>
                                     	<li><input type="reset" value="Reset" /></li>
                                   	</ul>
                                   	<script type="text/javascript">
-                                  	    var checker = document.getElementById('sure');
-                                        var sendbtn = document.getElementById('isSure');
+                                  	    var checker1 = document.getElementById('sure');
+                                        var sendbtn1 = document.getElementById('isSure');
                                         // when unchecked or checked, run the function
-                                        checker.onchange = function(){
+                                        checker1.onchange = function(){
                                             if(this.checked){
-                                                sendbtn.className = "button special";
+                                                sendbtn1.className = "button special";
                                             } else {
-                                                sendbtn.className = "button disabled";
+                                                sendbtn1.className = "button disabled";
                                             }
                                         }
                                     </script>
@@ -147,18 +345,18 @@
                                     <input type="checkbox" id="sure2" name="sure2" unchecked>
                                     <label for="sure2">Are you sure you want to delete your account and messages?</label>
                                     <ul class="actions">
-                                        <li><input type="submit" id="isSure2" value="Submit" class="button disabled" /></li>
+                                        <li><input type="submit" id="isSure2" name="isSure2" value="Delete" class="button disabled" /></li>
                                     	<li><input type="reset" value="Reset" /></li>
                                   	</ul>
                                   	<script type="text/javascript">
-                                  	    var checker = document.getElementById('sure2');
-                                        var sendbtn = document.getElementById('isSure2');
+                                  	    var checker2 = document.getElementById('sure2');
+                                        var sendbtn2 = document.getElementById('isSure2');
                                         // when unchecked or checked, run the function
-                                        checker.onchange = function(){
+                                        checker2.onchange = function(){
                                             if(this.checked){
-                                                sendbtn.className = "button special";
+                                                sendbtn2.className = "button special";
                                             } else {
-                                                sendbtn.className = "button disabled";
+                                                sendbtn2.className = "button disabled";
                                             }
                                         }
                                     </script>

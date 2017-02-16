@@ -6,6 +6,11 @@ if (!$link) {
 }
 mysql_query("SET NAMES 'utf8'");
 mysql_query("SET CHARACTER SET 'utf8'");
+mysql_query("set character_set_client=utf8");
+mysql_query("set character_set_connection=utf8");
+mysql_query("set collation_connection=utf8");
+mysql_query("set character_set_results=utf8");
+mysql_query("set time_zone='+02:00'");
 
 $select = mysql_select_db("Noisy_Parrot",$link);
 if (!select) {
@@ -23,6 +28,7 @@ if(empty($name) ){
 
     $name= 'Anonymous';
 }
+utf8_encode($name);
 $query = "SELECT COUNT(*) FROM Listener WHERE name = '" . $name . "' AND phone_number = '" . $number . "'";
 $result = mysql_query($query);
 $row = mysql_fetch_array($result);
