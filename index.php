@@ -30,6 +30,7 @@
 							<ul>
 								<li><a href="#search">Search</a></li>
 								<li><a href="#insert">Send A Message</a></li>
+								<li><a href="#participate">Register To Contest</a></li>
 								<li><a href="#update">Modify Account</a></li>
 								<li><a href="#delete">Delete Account</a></li>
 								<li><a href="#admin"><b>SQL Query</b></a></li>
@@ -43,7 +44,9 @@
 						<!-- Search -->
 							<article id="search">
 								<h2 class="major">Search</h2>
-								<p><strong>You can search for <a href="#songs">Songs</a>, <a href="#producers">Radio Producers</a> or <a href="#shows">Shows</a>!</p></strong>
+								<p><strong>You can search for <a href="#songs">Songs</a>, <a href="#producers">Radio Producers</a>, <a href="#shows">Shows</a> or open <a href="#contests">Contests</a>!</p></strong>
+								<p><strong>Or check upcoming <a href="#events">Events</a>!</p></strong>
+								<p><strong>You can also <a href="#producershow">check</a> who presents a Radio Show and vise versa!</p></strong>
 							</article>
 
 
@@ -254,8 +257,183 @@
                                 		</table>
                                 </div>
                             </article>
+                            <article id="contests">
+                                <h2 class="major">Open Contests</h2>
+                                <div class="table-wrapper">
+                                	    <table>
+                                		    <thead>
+                                			    <tr>
+                                				    <th>Name</th>
+                                					<th>Ending Date</th>
+                                					<th>Ending Time</th>
+                                					<th>Gifts</th>
+                                				</tr>
+                                			</thead>
+                                			<tbody>
+                                			    <?php
+                                                $link = mysql_connect("webpagesdb.it.auth.gr:3306","Administrator","Administrator");
+                                                if (!$link) {
+                                                    die("Can not connect: " . mysql_error());
+                                                }
+                                                mysql_query("SET NAMES 'utf8'");
+                                                mysql_query("SET CHARACTER SET 'utf8'");
+                                                mysql_query("set character_set_client=utf8");
+                                                mysql_query("set character_set_connection=utf8");
+                                                mysql_query("set collation_connection=utf8");
+                                                mysql_query("set character_set_results=utf8");
+                                                mysql_query("set time_zone='+02:00'");
 
+                                                $select = mysql_select_db("Noisy_Parrot",$link);
+                                                if (!select) {
+                                                    echo "Error: " . mysql_error();
+                                                }
+                                                $contestdate = date("Y-m-d");
+                                                $producerdate = mysql_real_escape_string($producerdate);
+                                                utf8_encode($producerdate);
+                                                mysql_select_db("Noisy_Parrot",$link);
+                                                $query = "SELECT *  FROM Contest WHERE ending_date >= '" . $contestdate . "'";
+                                                $result = mysql_query($query);
+                                                while($row = mysql_fetch_array($result)){
+                                                    $name = $row['name'];
+                                                    $endingdate = $row['ending_date'];
+                                                    $endingtime = $row['ending_time'];
+                                                    $gifts = $row['gift'];
+                                                    echo "<tr>";
+                                                    echo "<td>" . $name . "</td>";
+                                                    echo "<td>" . $endingdate . "</td>";
+                                                    echo "<td>" . $endingtime . "</td>";
+                                                    echo "<td>" . $gifts . "</td>";
+                                                    echo "</tr>";
+                                                }
+                                                ?>
+                                			</tbody>
+                                			<tfoot>
+                                			</tfoot>
+                                		</table>
+                                </div>
+                            </article>
+                            <article id="events">
+                                <h2 class="major">Upcoming Events</h2>
+                                <div class="table-wrapper">
+                                	    <table>
+                                		    <thead>
+                                			    <tr>
+                                				    <th>Name</th>
+                                					<th>Presenter</th>
+                                					<th>Location</th>
+                                					<th>Date</th>
+                                					<th>Time</th>
+                                					<th>Info</th>
+                                				</tr>
+                                			</thead>
+                                			<tbody>
+                                			    <?php
+                                                $link = mysql_connect("webpagesdb.it.auth.gr:3306","Administrator","Administrator");
+                                                if (!$link) {
+                                                    die("Can not connect: " . mysql_error());
+                                                }
+                                                mysql_query("SET NAMES 'utf8'");
+                                                mysql_query("SET CHARACTER SET 'utf8'");
+                                                mysql_query("set character_set_client=utf8");
+                                                mysql_query("set character_set_connection=utf8");
+                                                mysql_query("set collation_connection=utf8");
+                                                mysql_query("set character_set_results=utf8");
+                                                mysql_query("set time_zone='+02:00'");
 
+                                                $select = mysql_select_db("Noisy_Parrot",$link);
+                                                if (!select) {
+                                                    echo "Error: " . mysql_error();
+                                                }
+                                                $eventdate = date("Y-m-d");
+                                                $eventdate = mysql_real_escape_string($eventdate);
+                                                utf8_encode($eventdate);
+                                                mysql_select_db("Noisy_Parrot",$link);
+                                                $query = "SELECT *  FROM Event WHERE date >= '" . $eventdate . "'";
+                                                $result = mysql_query($query);
+                                                while($row = mysql_fetch_array($result)){
+                                                    $name = $row['name'];
+                                                    $presenter = $row['nickname'];
+                                                    $location = $row['location'];
+                                                    $date = $row['date'];
+                                                    $time = $row['time'];
+                                                    $info = $row['info'];
+                                                    echo "<tr>";
+                                                    echo "<td>" . $name . "</td>";
+                                                    echo "<td>" . $presenter . "</td>";
+                                                    echo "<td>" . $location . "</td>";
+                                                    echo "<td>" . $date . "</td>";
+                                                    echo "<td>" . $time . "</td>";
+                                                    echo "<td>" . $info . "</td>";
+                                                    echo "</tr>";
+                                                }
+                                                ?>
+                                			</tbody>
+                                			<tfoot>
+                                			</tfoot>
+                                		</table>
+                                </div>
+                            </article>
+                            <article id="producershow">
+                                <h2 class="major">Radio Shows And Producers</h2>
+                                <form method="get">
+                                    <div class="field">
+                                        <label for="producershowinput">Search Input</label>
+                                        <input type="text" name="producershowinput" id="producershowinput" required value="" placeholder="Show name or Producer nickname." />
+                                    </div>
+                                    <ul class="actions">
+                                        <li><input type="submit" id="doproducershowsearch" name="doproducershowsearch" value="Search"/></li>
+                                        <li><input type="reset" value="Reset" /></li>
+                                    </ul>
+                                </form>
+                                <div class="table-wrapper">
+                                	    <table>
+                                		    <thead>
+                                			    <tr>
+                                				    <th>Name</th>
+                                					<th>NickName</th>
+                                				</tr>
+                                			</thead>
+                                			<tbody>
+                                			    <?php
+                                            if(isset($_GET['doproducershowsearch'])){
+                                                $link = mysql_connect("webpagesdb.it.auth.gr:3306","Administrator","Administrator");
+                                                if (!$link) {
+                                                    die("Can not connect: " . mysql_error());
+                                                }
+                                                mysql_query("SET NAMES 'utf8'");
+                                                mysql_query("SET CHARACTER SET 'utf8'");
+                                                mysql_query("set character_set_client=utf8");
+                                                mysql_query("set character_set_connection=utf8");
+                                                mysql_query("set collation_connection=utf8");
+                                                mysql_query("set character_set_results=utf8");
+                                                mysql_query("set time_zone='+02:00'");
+
+                                                $select = mysql_select_db("Noisy_Parrot",$link);
+                                                if (!select) {
+                                                    echo "Error: " . mysql_error();
+                                                }
+                                                $producershowdata = $_GET['producershowinput'];
+                                                $producershowdata = mysql_real_escape_string($producershowdata);
+                                                utf8_encode($producershowdata);
+                                                mysql_select_db("Noisy_Parrot",$link);
+                                                $query = "SELECT *  FROM RadioShow_RadioShowProducer WHERE name = '" . $producershowdata . "' OR nickname = '" . $producershowdata . "'";
+                                                $result = mysql_query($query);
+                                                while($row = mysql_fetch_array($result)){
+                                                    $name = $row['name'];
+                                                    $nickname = $row['nickname'];
+                                                    echo "<tr>";
+                                                    echo "<td>" . $name . "</td>";
+                                                    echo "<td>" . $nickname . "</td>";
+                                                    echo "</tr>";
+                                                }
+                                            }
+                                            ?>
+                                			</tbody>
+                                			<tfoot>
+                                			</tfoot>
+                                		</table>
+                                </div>
+                            </article>
 
 						<!-- Insert -->
 							<article id="insert">
@@ -288,6 +466,25 @@
                                     </ul>
                                 </form>
 							</article>
+
+						<!-- Participate To A Contest -->
+                        <article id="participate">
+                        	<h2 class="major">Participate To A Contest</h2>
+                            <form method="post" action="participate.php" accept-charset="UTF-8">
+                                <div class="field half first">
+                                    <label for="number">Phone number</label>
+                                    <input type="text" name="number" id="number" required value="" placeholder="required" />
+                                </div>
+                                <div class="field half">
+                                    <label for="contest">Contest</label>
+                                        <input type="text" name="contest" id="contest" value=""  required placeholder="contest" />
+                                </div>
+                                <ul class="actions">
+                                    <li><input type="submit" name="submit" value="Submit"/></li>
+                                    <li><input type="reset" value="Reset" /></li>
+                                </ul>
+                            </form>
+                        </article>
 
 						<!-- Update -->
 							<article id="update">
