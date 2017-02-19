@@ -34,8 +34,9 @@
 								<li><a href="#update">Modify Account</a></li>
 								<li><a href="#delete">Delete Account</a></li>
 								<li><a href="#admin"><b>SQL Query</b></a></li>
-							</ul>
+                            </ul>
 						</nav>
+
 					</header>
 
 				<!-- Main -->
@@ -75,7 +76,7 @@
     									</thead>
     									<tbody>
     									    <?php
-                                            if(isset($_GET['dosongsearch'])){
+    									    if(isset($_GET['dosongsearch'])){
                                                 $link = mysql_connect("webpagesdb.it.auth.gr:3306","Administrator","Administrator");
                                                 if (!$link) {
                                                     die("Can not connect: " . mysql_error());
@@ -96,7 +97,11 @@
                                                 $songdata = mysql_real_escape_string($songdata);
                                                 utf8_encode($songdata);
                                                 mysql_select_db("Noisy_Parrot",$link);
-                                                $query = "SELECT *  FROM Song WHERE title = '" . $songdata . "' OR genre = '" . $songdata . "' OR album = '" . $songdata . "' OR release_year = '" . $songdata . "' OR artist = '" . $songdata . "'";
+                                                if ($songdata == "-") {
+                                                    $query = "SELECT * FROM Song";
+                                                } else {
+                                                    $query = "SELECT *  FROM Song WHERE title = '" . $songdata . "' OR genre = '" . $songdata . "' OR album = '" . $songdata . "' OR release_year = '" . $songdata . "' OR artist = '" . $songdata . "'";
+                                                }
                                                 $result = mysql_query($query);
                                                 while($row = mysql_fetch_array($result)){
                                                     $title = $row['title'];
@@ -165,7 +170,11 @@
                                                 $producerdata = mysql_real_escape_string($producerdata);
                                                 utf8_encode($producerdata);
                                                 mysql_select_db("Noisy_Parrot",$link);
-                                                $query = "SELECT *  FROM RadioShowProducer WHERE name = '" . $producerdata . "' OR nickname = '" . $producerdata . "'";
+                                                if ($producerdata == "-") {
+                                                    $query = "SELECT * FROM RadioShowProducer";
+                                                } else {
+                                                    $query = "SELECT *  FROM RadioShowProducer WHERE name = '" . $producerdata . "' OR nickname = '" . $producerdata . "'";
+                                                }
                                                 $result = mysql_query($query);
                                                 while($row = mysql_fetch_array($result)){
                                                     $name = $row['name'];
@@ -233,7 +242,11 @@
                                                 $radioshowdata = mysql_real_escape_string($radioshowdata);
                                                 utf8_encode($radioshowdata);
                                                 mysql_select_db("Noisy_Parrot",$link);
-                                                $query = "SELECT *  FROM RadioShow WHERE name = '" . $radioshowdata . "' OR start_time = '" . $radioshowdata . "' OR end_time = '" . $radioshowdata . "' OR theme = '" . $radioshowdata . "' OR duration = '" . $radioshowdata . "'";
+                                                if ($radioshowdata == "-") {
+                                                    $query = "SELECT * FROM RadioShow";
+                                                } else {
+                                                    $query = "SELECT *  FROM RadioShow WHERE name = '" . $radioshowdata . "' OR start_time = '" . $radioshowdata . "' OR end_time = '" . $radioshowdata . "' OR theme LIKE '" . $radioshowdata . "' OR duration = '" . $radioshowdata . "'";
+                                                }
                                                 $result = mysql_query($query);
                                                 while($row = mysql_fetch_array($result)){
                                                     $name = $row['name'];
@@ -476,7 +489,7 @@
                                     <input type="text" name="number" id="number" required value="" placeholder="required" />
                                 </div>
                                 <div class="field">
-                                	<label for="show">Show</label>
+                                	<label for="show">Contest</label>
                                 	<div class="select-wrapper">
                                         <select name="contest" id="contest">
                                             <option value="default">-</option>
