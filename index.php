@@ -224,7 +224,7 @@
                                             if(isset($_GET['doradioshowsearch'])){
                                                 $link = mysql_connect("webpagesdb.it.auth.gr:3306","Administrator","Administrator");
                                                 if (!$link) {
-                                                    die("Can not connect: " . mysql_error());
+                                                    die("Can not connect:" . mysql_error());
                                                 }
                                                 mysql_query("SET NAMES 'utf8'");
                                                 mysql_query("SET CHARACTER SET 'utf8'");
