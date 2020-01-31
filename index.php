@@ -90,7 +90,7 @@
                                                 mysql_query("set time_zone='+02:00'");
 
                                                 $select = mysql_select_db("Noisy_Parrot",$link);
-                                                if (!select) {
+                                                if (!$select) {
                                                     echo "Error: " . mysql_error();
                                                 }
                                                 $songdata = $_GET['songinput'];
@@ -163,7 +163,7 @@
                                                 mysql_query("set time_zone='+02:00'");
 
                                                 $select = mysql_select_db("Noisy_Parrot",$link);
-                                                if (!select) {
+                                                if (!$select) {
                                                     echo "Error: " . mysql_error();
                                                 }
                                                 $producerdata = $_GET['producerinput'];
@@ -235,7 +235,7 @@
                                                 mysql_query("set time_zone='+02:00'");
 
                                                 $select = mysql_select_db("Noisy_Parrot",$link);
-                                                if (!select) {
+                                                if (!$select) {
                                                     echo "Error: " . mysql_error();
                                                 }
                                                 $radioshowdata = $_GET['radioshowinput'];
@@ -297,7 +297,7 @@
                                                 mysql_query("set time_zone='+02:00'");
 
                                                 $select = mysql_select_db("Noisy_Parrot",$link);
-                                                if (!select) {
+                                                if (!$select) {
                                                     echo "Error: " . mysql_error();
                                                 }
                                                 $contestdate = date("Y-m-d");
@@ -354,7 +354,7 @@
                                                 mysql_query("set time_zone='+02:00'");
 
                                                 $select = mysql_select_db("Noisy_Parrot",$link);
-                                                if (!select) {
+                                                if (!$select) {
                                                     echo "Error: " . mysql_error();
                                                 }
                                                 $eventdate = date("Y-m-d");
@@ -422,7 +422,7 @@
                                                 mysql_query("set time_zone='+02:00'");
 
                                                 $select = mysql_select_db("Noisy_Parrot",$link);
-                                                if (!select) {
+                                                if (!$select) {
                                                     echo "Error: " . mysql_error();
                                                 }
                                                 $producershowdata = $_GET['producershowinput'];

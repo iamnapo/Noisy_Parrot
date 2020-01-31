@@ -13,7 +13,7 @@ mysql_query("set character_set_results=utf8");
 mysql_query("set time_zone='+02:00'");
 
 $select = mysql_select_db("Noisy_Parrot",$link);
-if (!select) {
+if (!$select) {
     echo "Error: " . mysql_error();
 }
 
@@ -34,5 +34,3 @@ $contestname = mysql_result($result, 0);
 $query = "INSERT INTO Listener_Contest (phone_number, unique_id) VALUES ('" . $number . "', '" . $contestname . "')";
 mysql_query($query);
 header('Location: /');
-
-?>

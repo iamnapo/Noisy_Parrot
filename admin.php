@@ -13,7 +13,7 @@ mysql_query("set character_set_results=utf8");
 mysql_query("set time_zone='+02:00'");
 
 $select = mysql_select_db("Noisy_Parrot",$link);
-if (!select) {
+if (!$select) {
     echo "Error: " . mysql_error();
 }
 
@@ -33,5 +33,3 @@ if ($list['code'] == $admincode) {
     $query = mysql_query($sqlquery);
 }
 header('Location: /');
-
-?>

@@ -13,7 +13,7 @@ mysql_query("set character_set_results=utf8");
 mysql_query("set time_zone='+02:00'");
 
 $select = mysql_select_db("Noisy_Parrot",$link);
-if (!select) {
+if (!$select) {
     echo "Error: " . mysql_error();
 }
 
@@ -44,4 +44,3 @@ if(isset($_POST['submit'])) {
 
 }
 header('Location: /');
-?>
